@@ -230,9 +230,15 @@ namespace Sitmikh.SolidWorks.BlankAddin
             {
                 ds = reader.AsDataSet(new ExcelDataSetConfiguration {
                     ConfigureDataTable = _ => new ExcelDataTableConfiguration {
-                        UseHeaderRow = true
+                        UseHeaderRow = false
                     }
                 });
+            }
+
+            int startIndex = 5;
+            for (int i = startIndex; i < ds.Tables[0].Columns.Count; i++)
+            {
+                ds.Tables[0].Columns.Remove(ds.Tables[0].Columns[i]);
             }
 
             tableCollection = ds.Tables;
