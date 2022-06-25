@@ -241,6 +241,7 @@ namespace Sitmikh.SolidWorks.BlankAddin
             {
                 ds.Tables[0].Columns.RemoveAt(ds.Tables[0].Columns.Count - 1);
             }
+            ds.Tables[0].AcceptChanges();
 
             tableCollection = ds.Tables;
         }
