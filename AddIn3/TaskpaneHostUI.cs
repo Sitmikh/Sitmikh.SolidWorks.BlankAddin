@@ -262,6 +262,8 @@ namespace Sitmikh.SolidWorks.BlankAddin
         {
             DataTable table = tableCollection[0];
             dataGridView1.DataSource = table;
+            dataGridView1.Rows.RemoveAt(0);
+            dataGridView1.Columns[1].HeaderText = "Fuck";
 
             pictureBox1.Image = Image.FromFile(@"D:\VKR\Addin\ClutchLibrary\Upd\Муфта зубчатая_3D.PNG");
             pictureBox2.Image = Image.FromFile(@"D:\VKR\Addin\ClutchLibrary\Upd\Муфта_зубчатая_Чертеж.PNG");
