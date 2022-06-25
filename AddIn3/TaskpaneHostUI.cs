@@ -219,17 +219,14 @@ namespace Sitmikh.SolidWorks.BlankAddin
 
         }
 
-        private void LoadTable(string path)
+        private void LoadTable()
         {
             FileStream stream = File.Open(@"D:\VKR\Addin\ClutchLibrary\Upd\Муфта зубчатая.xlsx", FileMode.Open,
                 FileAccess.Read);
             
             var ds = new DataSet();
-            int fileformat = path.IndexOf(".xlsx", StringComparison.InvariantCultureIgnoreCase);
-                
-            using (var reader = fileformat > -1
-                       ? ExcelReaderFactory.CreateOpenXmlReader(stream)
-                       : ExcelReaderFactory.CreateBinaryReader(stream))
+
+            using (var reader = ExcelReaderFactory.CreateOpenXmlReader(stream))
             {
                 ds = reader.AsDataSet(new ExcelDataSetConfiguration {
                     ConfigureDataTable = _ => new ExcelDataTableConfiguration {
@@ -253,7 +250,7 @@ namespace Sitmikh.SolidWorks.BlankAddin
 
                     Text = fileName;
 
-                    LoadTable(fileName);
+                    LoadTable();
                 }
                 else
                 {
