@@ -235,7 +235,7 @@ namespace Sitmikh.SolidWorks.BlankAddin
                 });
             }
 
-            while (ds.Tables[0].Columns.Count > 6)
+            while (ds.Tables[0].Columns.Count > 5)
             {
                 ds.Tables[0].Columns.RemoveAt(ds.Tables[0].Columns.Count - 1);
             }
