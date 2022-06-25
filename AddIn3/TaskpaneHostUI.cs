@@ -8,6 +8,7 @@ using System.Runtime.InteropServices;
 using System.Windows.Forms;
 using System.Diagnostics;
 using System.IO;
+using System.Linq;
 using ExcelDataReader;
 
 namespace Sitmikh.SolidWorks.BlankAddin
@@ -235,6 +236,7 @@ namespace Sitmikh.SolidWorks.BlankAddin
                 });
             }
 
+            ds.Tables[0].Rows.Remove(ds.Tables[0].Rows[0]);
             while (ds.Tables[0].Columns.Count > 6)
             {
                 ds.Tables[0].Columns.RemoveAt(ds.Tables[0].Columns.Count - 1);
