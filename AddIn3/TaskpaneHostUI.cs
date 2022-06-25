@@ -235,10 +235,9 @@ namespace Sitmikh.SolidWorks.BlankAddin
                 });
             }
 
-            int startIndex = 5;
-            for (int i = startIndex; i < ds.Tables[0].Columns.Count; i++)
+            while (ds.Tables[0].Columns.Count > 6)
             {
-                ds.Tables[0].Columns.Remove(ds.Tables[0].Columns[i]);
+                ds.Tables[0].Columns.RemoveAt(ds.Tables[0].Columns.Count - 1);
             }
 
             tableCollection = ds.Tables;
