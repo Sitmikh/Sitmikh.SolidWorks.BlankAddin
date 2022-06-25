@@ -250,20 +250,7 @@ namespace Sitmikh.SolidWorks.BlankAddin
         {
             try
             {
-                DialogResult res = openFileDialog1.ShowDialog();
-
-                if (res == DialogResult.OK)
-                {
-                    fileName = openFileDialog1.FileName;
-
-                    Text = fileName;
-
-                    LoadTable();
-                }
-                else
-                {
-                    throw new Exception("Файл не выбран!");
-                }
+                LoadTable();
             }
             catch (Exception ex)
             {
