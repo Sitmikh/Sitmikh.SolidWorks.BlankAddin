@@ -1,21 +1,11 @@
 ﻿using SolidWorks.Interop.sldworks;
 using SolidWorks.Interop.swcommands;
 using SolidWorks.Interop.swconst;
-using SolidWorks.Interop.swdocumentmgr;
-using SolidWorks.Interop.swpublished;
-
 using System;
-using System.Collections.Generic;
-using System.ComponentModel;
 using System.Data;
 using System.Drawing;
-using System.Linq;
 using System.Runtime.InteropServices;
-using System.Text;
-using System.Threading.Tasks;
 using System.Windows.Forms;
-
-using Excel = Microsoft.Office.Interop.Excel;
 using System.Diagnostics;
 using System.IO;
 using ExcelDataReader;
@@ -236,30 +226,22 @@ namespace Sitmikh.SolidWorks.BlankAddin
 
             if (ofd.ShowDialog() == DialogResult.OK)
             {
-                Excel.IExcelDataReader IEDR;
+                var ds = new DataSet();
                 int fileformat = ofd.SafeFileName.IndexOf(".xlsx");
-                if (fileformat > -1)
+                
+                using (var reader = fileformat > -1
+                           ? ExcelReaderFactory.CreateOpenXmlReader(stream)
+                           : ExcelReaderFactory.CreateBinaryReader(stream))
                 {
-                    IEDR = Excel.ExcelReaderFactory.CreateOpenXmlReader(stream);
+                    ds = reader.AsDataSet(new ExcelDataSetConfiguration {
+                        ConfigureDataTable = _ => new ExcelDataTableConfiguration {
+                            UseHeaderRow = true
+                        }
+                    });
                 }
-                else
-                {
-                    IEDR = Excel.ExcelReaderFactory.CreateBinaryReader(stream);
-                }
-                IEDR.IsFirstRowAsColumnNames = true;
-                DataSet ds = IEDR.AsDataSet();
-                dataGridView1.DataSource = ds.Tables[0];
-                IEDR.Close();
+
+                tableCollection = ds.Tables;
             }
-
-            IExcelDataReader reader = ExcelReaderFactory.CreateReader(stream);
-
-           
-
-            tableCollection = db.Tables;
-
-
-
         }
 
         private void button11_Click(object sender, EventArgs e)
