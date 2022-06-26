@@ -16,9 +16,19 @@ namespace Sitmikh.SolidWorks.BlankAddin
     [ProgId(TaskpaneIntegration.SWTASKPANE_PROGID)]
     public partial class TaskpaneHostUI : UserControl
     {
+        #region MEMBERS
         public SldWorks swApp; //приложение  //заменил на TaskpaneIntegration.mSolidWorksApplication сделав mSolidWorksApplication статик
         private ModelDoc2 swModel; //модель
-                                   //private ModelDoc2 tmpObj; //не используемый объект
+        //private ModelDoc2 tmpObj; //не используемый объект
+
+        //для выбора муфты
+
+        string image3DPath;
+        string image2DPath;
+        string excelTablePath;
+        string sldprtPath;
+
+
 
         //1 кнопка
         private string sldFile;
@@ -45,9 +55,17 @@ namespace Sitmikh.SolidWorks.BlankAddin
         //для загрузки таблицы
         private string fileName = string.Empty;
         private DataTableCollection tableCollection = null;
-
+        DataTable table = new DataTable();
+        
         //для кнопки 12
         public Mouse msMouse;
+
+        //неиспользуемые переменные
+
+        
+        #endregion
+
+
         public TaskpaneHostUI()
         {
             InitializeComponent();
@@ -60,7 +78,135 @@ namespace Sitmikh.SolidWorks.BlankAddin
             #endregion
         }
 
+        #region ВЫБОР МУФТЫ, ЗАГРУЗКА ТАБЛИЦЫ И КАРТИНОК
+       
+        
+        /// <summary>
+        /// выбор муфты
+        /// </summary>
+        private void comboBox1_SelectedIndexChanged(object sender, EventArgs e)
+        {
+            if (comboBox1.SelectedIndex != -1)
+            {
+                switch (comboBox1.SelectedIndex)
+                {
+                    case 0:
+                        excelTablePath = Path.Combine(Path.GetDirectoryName(typeof(TaskpaneIntegration).Assembly.CodeBase).
+                    Replace(@"file:\", string.Empty), "ClutchLibrary", "Муфта зубчатая", "Муфта_зубчатая.xlsx");
+                        //sldFile = @"D:\VKR\Addin\ClutchLibrary\Upd\Муфта зубчатая.xlsx";
+                        image3DPath = Path.Combine(Path.GetDirectoryName(typeof(TaskpaneIntegration).Assembly.CodeBase).
+                    Replace(@"file:\", string.Empty), "ClutchLibrary", "Муфта зубчатая", "Муфта_зубчатая_3D.PNG");
 
+                        image2DPath = Path.Combine(Path.GetDirectoryName(typeof(TaskpaneIntegration).Assembly.CodeBase).
+                    Replace(@"file:\", string.Empty), "ClutchLibrary", "Муфта зубчатая", "Муфта_зубчатая_2D.PNG");
+
+                        sldprtPath = Path.Combine(Path.GetDirectoryName(typeof(TaskpaneIntegration).Assembly.CodeBase).
+                    Replace(@"file:\", string.Empty), "ClutchLibrary", "Муфта зубчатая", "Муфта_зубчатая.SLDPRT");
+                        break;
+                    case 1:
+                        label1.Text = "Эта муфта доступна в платной версии программы";
+                        break;
+                    case 2:
+                        label1.Text = "Эта муфта доступна в платной версии программы";
+                        break;
+                    case 3:
+                        label1.Text = "Эта муфта доступна в платной версии программы";
+                        break;
+                    case 4:
+                        label1.Text = "Эта муфта доступна в платной версии программы";
+                        break;
+                    case 5:
+                        label1.Text = "Эта муфта доступна в платной версии программы";
+                        break;
+                    case 6:
+                        label1.Text = "Эта муфта доступна в платной версии программы";
+                        break;
+                    case 7:
+                        label1.Text = "Эта муфта доступна в платной версии программы";
+                        break;
+                    case 8:
+                        label1.Text = "Эта муфта доступна в платной версии программы";
+                        break;
+                    case 9:
+                        label1.Text = "Эта муфта доступна в платной версии программы";
+                        break;
+                }
+                try
+                {
+                    LoadTable();
+                }
+                catch (Exception ex)
+                {
+                    MessageBox.Show(ex.Message, "Ошибка! Не удалось найти указанную таблицу", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                }
+
+                table = tableCollection[0]; //принимаем таблицу из Excel
+                dataGridView1.DataSource = table;
+
+                
+                dataGridView1.Rows.RemoveAt(0); 
+                dataGridView1.Rows.RemoveAt(0);
+                dataGridView1.Columns.RemoveAt(0);
+
+                
+
+                dataGridView1.Columns[0].HeaderText = "d"; //оформляем столбцы
+                dataGridView1.Columns[0].Width = 50;
+                dataGridView1.Columns[1].HeaderText = "D";
+                dataGridView1.Columns[1].Width = 50;
+                dataGridView1.Columns[2].HeaderText = "L";
+                dataGridView1.Columns[2].Width = 50;
+                dataGridView1.Columns[3].HeaderText = "Tкр";
+                dataGridView1.Columns[3].Width = 500;
+
+                pictureBox1.Image = Image.FromFile(image3DPath);
+                pictureBox2.Image = Image.FromFile(image2DPath);
+            }
+        }
+        private void LoadTable()
+        {
+            FileStream stream = File.Open(excelTablePath, FileMode.Open,
+                FileAccess.Read);
+
+            var ds = new DataSet();
+
+            using (var reader = ExcelReaderFactory.CreateOpenXmlReader(stream))
+            {
+                ds = reader.AsDataSet(new ExcelDataSetConfiguration
+                {
+                    ConfigureDataTable = _ => new ExcelDataTableConfiguration
+                    {
+                        UseHeaderRow = false
+                    }
+                });
+            }
+
+            while (ds.Tables[0].Columns.Count > 5)
+            {
+                ds.Tables[0].Columns.RemoveAt(ds.Tables[0].Columns.Count - 1);
+            }
+            ds.Tables[0].AcceptChanges();
+
+            tableCollection = ds.Tables;
+        }
+        #endregion
+
+        #region ФИЛЬТР ТАБЛИЦЫ И ВЫДЕЛЕНИЕ СТРОКИ
+        private void textBox1_TextChanged(object sender, EventArgs e)
+        {
+            //table.DefaultView.RowFilter = string.Format("[{0}] LIKE '%{1}%'", "d", textBox1.Text);
+            //table.DefaultView.RowFilter = string.Format("Convert([{0}], 'System.String') LIKE '%{1}%'", "d", textBox1.Text);
+        }
+
+        private void dataGridView1_SelectionChanged(object sender, EventArgs e)
+        {
+            //dataGridView1.Rows[dataGridView1.CurrentCell.RowIndex].Selected = true;
+        }
+
+        #endregion
+
+
+        #region НЕНУЖНЫЕ КНОПКИ (С ГОТОВЫМИ РЕШЕНИЯМИ)
         private void button1_Click(object sender, EventArgs e) //открытие муфты в новом окне сборки
         {
 
@@ -79,35 +225,35 @@ namespace Sitmikh.SolidWorks.BlankAddin
             if (checkBox4.Checked == true)
                 sldFile += checkBox4.Text + @"\Муфта со звездочкой 4.SLDASM";
             #region
-            //int clutchIndex = comboBox1.SelectedIndex;
-            //switch (clutchIndex)
-            //{
-            //    case 0:
+            int clutchIndex = comboBox1.SelectedIndex;
+            switch (clutchIndex)
+            {
+                case 0:
 
-            //        sldFile += comboBox1.SelectedValue.ToString() + @"\Зубчатая муфта.sldprt";
-            //        //MessageBox.Show("0");
-            //        break;
-            //    case 1:
-            //        //MessageBox.Show(Convert.ToString(1));
-            //        sldFile += comboBox1.SelectedValue.ToString()+ @"\Сборка МУВП 3 пальца.SLDASM";
-            //        // MessageBox.Show(libraryPath);
-            //        break;
-            //    case 2:
-            //        //MessageBox.Show(Convert.ToString(2));
-            //        sldFile += comboBox1.SelectedValue.ToString() + @"\Фланцевая муфта.SLDASM";
-            //        // MessageBox.Show(libraryPath);
-            //        break;
-            //    case 3:
-            //        //MessageBox.Show(Convert.ToString(3));
-            //        sldFile += comboBox1.SelectedValue.ToString() + @"\Муфта со звездочкой 4.SLDASM";
-            //        //MessageBox.Show(libraryPath);
-            //        break;
-            //    default:
-            //        MessageBox.Show("Выберите тип муфты");
-            //        break;
-            //}
-            //MessageBox.Show(pathFile);
-            //GetDataFromFile();
+                    sldFile += comboBox1.SelectedValue.ToString() + @"\Зубчатая муфта.sldprt";
+                    //MessageBox.Show("0");
+                    break;
+                case 1:
+                    //MessageBox.Show(Convert.ToString(1));
+                    sldFile += comboBox1.SelectedValue.ToString() + @"\Сборка МУВП 3 пальца.SLDASM";
+                    // MessageBox.Show(libraryPath);
+                    break;
+                case 2:
+                    //MessageBox.Show(Convert.ToString(2));
+                    sldFile += comboBox1.SelectedValue.ToString() + @"\Фланцевая муфта.SLDASM";
+                    // MessageBox.Show(libraryPath);
+                    break;
+                case 3:
+                    //MessageBox.Show(Convert.ToString(3));
+                    sldFile += comboBox1.SelectedValue.ToString() + @"\Муфта со звездочкой 4.SLDASM";
+                    //MessageBox.Show(libraryPath);
+                    break;
+                default:
+                    MessageBox.Show("Выберите тип муфты");
+                    break;
+            }
+            MessageBox.Show(sldFile);
+            // GetDataFromFile();
             #endregion
             label1.Text = "Выбрать муфту";
             label1.Text += sldFile;
@@ -128,7 +274,6 @@ namespace Sitmikh.SolidWorks.BlankAddin
                 Debug.Print("File = " + swModel.GetPathName());
                 Debug.Print("");
             }
-
 
 
         }
@@ -177,76 +322,17 @@ namespace Sitmikh.SolidWorks.BlankAddin
             swDesingTable.Detach(); //деактивация таблицы параметров
         }
 
-        private void button4_Click(object sender, EventArgs e)
+        private void button4_Click(object sender, EventArgs e) //не нужна
         {
             swModel.ShowConfiguration2(listBox1.Text); //Показывает именованную конфигурацию, переключаясь на эту конфигурацию и делая ее активной конфигурацией.
         }
-
-        private void button5_Click(object sender, EventArgs e)
-        {
-            swModel = TaskpaneIntegration.mSolidWorksApplication.ActiveDoc;
-            //swModel = swApp.ActiveDoc;
-            //Part = (AssemblyDoc)swApp.ActiveDoc;
-            int fileError = 0;
-            int fileWarning = 0;
-
-            swModel = (ModelDoc2)TaskpaneIntegration.mSolidWorksApplication.OpenDoc6(@"D:\VKR\Addin\ClutchLibrary\Upd\Муфта зубчатая.SLDPRT",
-            1,
-            (int)swOpenDocOptions_e.swOpenDocOptions_Silent,
-            "", //параметр Configuration открывает модель именно в той конфигурации, в какой мы задумали 
-           ref fileError,
-           ref fileWarning);
-
-            Part = TaskpaneIntegration.mSolidWorksApplication.ActivateDoc3("loaded_document",
-                true,
-                0,
-                ref fileError);
-
-            swInsertedComponent = Part.AddComponent5(@"D:\VKR\Addin\ClutchLibrary\Upd\Муфта зубчатая.SLDPRT",
-                 0,
-                 "Default",
-                 false,
-                 "",
-                 5.42027305169652E-02, 6.53507206261547E-02, 4.03630755082414E-02);
-            TaskpaneIntegration.mSolidWorksApplication.CloseDoc(@"D:\VKR\Addin\ClutchLibrary\Upd\Муфта зубчатая.SLDPRT");
-            bool boolstatus = Part.AddComponent(@"D:\VKR\Addin\ClutchLibrary\Upd\Муфта зубчатая.SLDPRT", 4.26089577376842E-03, 8.44019707292318E-02, 0.111121182912029);
+        #endregion
 
 
-
-        }
-
-        private void checkBox5_CheckedChanged(object sender, EventArgs e)
-        {
-
-        }
-
-        private void LoadTable()
-        {
-            FileStream stream = File.Open(@"D:\VKR\Addin\ClutchLibrary\Upd\Муфта зубчатая.xlsx", FileMode.Open,
-                FileAccess.Read);
-            
-            var ds = new DataSet();
-
-            using (var reader = ExcelReaderFactory.CreateOpenXmlReader(stream))
-            {
-                ds = reader.AsDataSet(new ExcelDataSetConfiguration {
-                    ConfigureDataTable = _ => new ExcelDataTableConfiguration {
-                        UseHeaderRow = false
-                    }
-                });
-            }
-
-            ds.Tables[0].Rows[0].Delete();
-            ds.Tables[0].Columns.RemoveAt(0);
-            while (ds.Tables[0].Columns.Count > 5)
-            {
-                ds.Tables[0].Columns.RemoveAt(ds.Tables[0].Columns.Count - 1);
-            }
-            ds.Tables[0].AcceptChanges();
-
-            tableCollection = ds.Tables;
-        }
-
+        #region ДОБАВЛЕНИЕ ТАБЛИЦЫ
+        /// <summary>
+        /// добавляем таблицу в из Excel в память
+        /// </summary>
         private void button11_Click(object sender, EventArgs e)
         {
             try
@@ -255,21 +341,36 @@ namespace Sitmikh.SolidWorks.BlankAddin
             }
             catch (Exception ex)
             {
-                MessageBox.Show(ex.Message, "Ошибка!", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                MessageBox.Show(ex.Message, "Ошибка! Не удалось найти указанную таблицу", MessageBoxButtons.OK, MessageBoxIcon.Error);
             }
         }
 
+        /// <summary>
+        /// добавляем таблицу из памяти в dataGridView1 и загружаем картинки в pictureBox1 и 2.
+        /// </summary>
         private void button9_Click(object sender, EventArgs e)
         {
             DataTable table = tableCollection[0];
             dataGridView1.DataSource = table;
             dataGridView1.Rows.RemoveAt(0);
+            dataGridView1.Rows.RemoveAt(0);
+            dataGridView1.Columns.RemoveAt(0);
             dataGridView1.Columns[1].HeaderText = "Fuck";
 
             pictureBox1.Image = Image.FromFile(@"D:\VKR\Addin\ClutchLibrary\Upd\Муфта зубчатая_3D.PNG");
             pictureBox2.Image = Image.FromFile(@"D:\VKR\Addin\ClutchLibrary\Upd\Муфта_зубчатая_Чертеж.PNG");
         }
+        
+        
+        #endregion
 
+
+        #region ДОБАВЛЕНИЕ МУФТЫ В СБОРКУ
+      
+
+        /// <summary>
+        /// тестовое добавление детали через AddComponents3
+        /// </summary>
         private void button12_Click(object sender, EventArgs e)
         {
             AssemblyDoc assemb;
@@ -327,6 +428,45 @@ namespace Sitmikh.SolidWorks.BlankAddin
             }
         }
 
+        /// <summary>
+        /// тестовое добавление детали [2] через OpenDoc6/CloseDoc, AddComponent и AddComponent5
+        /// </summary>
+        private void button5_Click(object sender, EventArgs e)
+        {
+            swModel = TaskpaneIntegration.mSolidWorksApplication.ActiveDoc;
+            //swModel = swApp.ActiveDoc;
+            //Part = (AssemblyDoc)swApp.ActiveDoc;
+            int fileError = 0;
+            int fileWarning = 0;
+
+            swModel = (ModelDoc2)TaskpaneIntegration.mSolidWorksApplication.OpenDoc6(@"D:\VKR\Addin\ClutchLibrary\Upd\Муфта зубчатая.SLDPRT",
+            1,
+            (int)swOpenDocOptions_e.swOpenDocOptions_Silent,
+            "", //параметр Configuration открывает модель именно в той конфигурации, в какой мы задумали 
+           ref fileError,
+           ref fileWarning);
+
+            Part = TaskpaneIntegration.mSolidWorksApplication.ActivateDoc3("loaded_document",
+                true,
+                0,
+                ref fileError);
+
+            swInsertedComponent = Part.AddComponent5(@"D:\VKR\Addin\ClutchLibrary\Upd\Муфта зубчатая.SLDPRT",
+                 0,
+                 "Default",
+                 false,
+                 "",
+                 5.42027305169652E-02, 6.53507206261547E-02, 4.03630755082414E-02);
+            TaskpaneIntegration.mSolidWorksApplication.CloseDoc(@"D:\VKR\Addin\ClutchLibrary\Upd\Муфта зубчатая.SLDPRT");
+            bool boolstatus = Part.AddComponent(@"D:\VKR\Addin\ClutchLibrary\Upd\Муфта зубчатая.SLDPRT", 4.26089577376842E-03, 8.44019707292318E-02, 0.111121182912029);
+
+
+
+        }
+
+        /// <summary>
+        /// тестовое добавление детали [2] через OpenDoc6/CloseDoc, AddComponent и AddComponent5
+        /// </summary>
         private void button13_Click(object sender, EventArgs e)
         {
             //object Part;
@@ -360,7 +500,13 @@ namespace Sitmikh.SolidWorks.BlankAddin
 
 
         }
+        #endregion
 
+
+        #region ПОПЫТКА ОТСЛЕДИТЬ ПОЛОЖЕНИЕ УКАЗАТЕЛЯ МЫШИ
+        /// <summary>
+        /// попытка отследить положение указателя мыши
+        /// </summary>
         private void button14_Click(object sender, EventArgs e)
         {
             ModelDoc2 swModel = default(ModelDoc2);
@@ -452,6 +598,32 @@ namespace Sitmikh.SolidWorks.BlankAddin
 
             return 1;
         }
+        #endregion
+
+
+        #region ЗАЩИТА ПОЛЕЙ ВВОДА
+        private void textBox1_KeyPress(object sender, KeyPressEventArgs e)
+        {
+            if ((e.KeyChar >= '0') && (e.KeyChar <= '9'))
+                    return;
+            if (Char.IsControl(e.KeyChar))
+            {
+                if (e.KeyChar == (char)Keys.Enter)
+                {
+                    if (sender.Equals(textBox1))
+                        textBox2.Focus();
+                    else comboBox1.Focus();
+                }
+                return;
+            }
+            e.Handled = true;
+        }
+
+
+
+        #endregion
+
+       
     }
 }
 

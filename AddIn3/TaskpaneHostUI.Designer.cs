@@ -167,16 +167,25 @@ namespace Sitmikh.SolidWorks.BlankAddin
             "МУВП",
             "Фланцевая муфта",
             "Звездочка"});
+            this.comboBox1.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
             this.comboBox1.FormattingEnabled = true;
             this.comboBox1.Items.AddRange(new object[] {
-            "Зубчатая муфта",
-            "МУВП",
-            "Фланцевая муфта",
-            "Звездочка"});
+            "Муфта зубчатая",
+            "Муфта упругая втулочно-пальцевая",
+            "Муфта фланцевая",
+            "Муфта упругая со звездочкой\\",
+            "Муфта торообразная",
+            "Муфта фрикционная",
+            "Муфта свободного хода",
+            "Муфта центробежная",
+            "Муфта предохранительная",
+            "(Муфта продольно-свертная)"});
             this.comboBox1.Location = new System.Drawing.Point(6, 36);
+            this.comboBox1.MaxDropDownItems = 10;
             this.comboBox1.Name = "comboBox1";
             this.comboBox1.Size = new System.Drawing.Size(168, 21);
             this.comboBox1.TabIndex = 8;
+            this.comboBox1.SelectedIndexChanged += new System.EventHandler(this.comboBox1_SelectedIndexChanged);
             // 
             // checkBox1
             // 
@@ -236,7 +245,6 @@ namespace Sitmikh.SolidWorks.BlankAddin
             this.checkBox5.TabIndex = 14;
             this.checkBox5.Text = "Муфта зубчатая";
             this.checkBox5.UseVisualStyleBackColor = true;
-            this.checkBox5.CheckedChanged += new System.EventHandler(this.checkBox5_CheckedChanged);
             // 
             // button5
             // 
@@ -263,6 +271,8 @@ namespace Sitmikh.SolidWorks.BlankAddin
             this.textBox1.Name = "textBox1";
             this.textBox1.Size = new System.Drawing.Size(117, 20);
             this.textBox1.TabIndex = 17;
+            this.textBox1.TextChanged += new System.EventHandler(this.textBox1_TextChanged);
+            this.textBox1.KeyPress += new System.Windows.Forms.KeyPressEventHandler(this.textBox1_KeyPress);
             // 
             // textBox2
             // 
@@ -320,6 +330,7 @@ namespace Sitmikh.SolidWorks.BlankAddin
             this.dataGridView1.RowHeadersVisible = false;
             this.dataGridView1.Size = new System.Drawing.Size(298, 232);
             this.dataGridView1.TabIndex = 24;
+            this.dataGridView1.SelectionChanged += new System.EventHandler(this.dataGridView1_SelectionChanged);
             // 
             // button6
             // 
