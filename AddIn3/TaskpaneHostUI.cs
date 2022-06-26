@@ -104,7 +104,17 @@ namespace Sitmikh.SolidWorks.BlankAddin
                     Replace(@"file:\", string.Empty), "ClutchLibrary", "Муфта зубчатая", "Муфта_зубчатая.SLDPRT");
                         break;
                     case 1:
-                        label1.Text = "Эта муфта доступна в платной версии программы";
+                        excelTablePath = Path.Combine(Path.GetDirectoryName(typeof(TaskpaneIntegration).Assembly.CodeBase).
+                    Replace(@"file:\", string.Empty), "ClutchLibrary", "Муфта упругая втулочно-пальецвая", "Муфта_упругая_втулочно-пальцевая.xlsx");
+                        //sldFile = @"D:\VKR\Addin\ClutchLibrary\Upd\Муфта зубчатая.xlsx";
+                        image3DPath = Path.Combine(Path.GetDirectoryName(typeof(TaskpaneIntegration).Assembly.CodeBase).
+                    Replace(@"file:\", string.Empty), "ClutchLibrary", "Муфта упругая втулочно-пальецвая", "Муфта упругая втулочно-пальецвая_3D.PNG");
+
+                        image2DPath = Path.Combine(Path.GetDirectoryName(typeof(TaskpaneIntegration).Assembly.CodeBase).
+                    Replace(@"file:\", string.Empty), "ClutchLibrary", "Муфта упругая втулочно-пальецвая", "Муфта упругая втулочно-пальецвая_2D.PNG");
+
+                        sldprtPath = Path.Combine(Path.GetDirectoryName(typeof(TaskpaneIntegration).Assembly.CodeBase).
+                    Replace(@"file:\", string.Empty), "ClutchLibrary", "Муфта упругая втулочно-пальецвая", "Муфта_упругая_втулочно-пальцевая.SLDPRT");
                         break;
                     case 2:
                         label1.Text = "Эта муфта доступна в платной версии программы";
@@ -429,7 +439,7 @@ namespace Sitmikh.SolidWorks.BlankAddin
         }
 
         /// <summary>
-        /// тестовое добавление детали [2] через OpenDoc6/CloseDoc, AddComponent и AddComponent5
+        /// тестовое добавление детали [1] через OpenDoc6/CloseDoc, AddComponent и AddComponent5
         /// </summary>
         private void button5_Click(object sender, EventArgs e)
         {
@@ -479,23 +489,23 @@ namespace Sitmikh.SolidWorks.BlankAddin
             Component2 swInsertedComponent; 
 
 
-            tmpObj = TaskpaneIntegration.mSolidWorksApplication.OpenDoc6(@"D:\VKR\Addin\ClutchLibrary\Upd\Муфта зубчатая.SLDPRT",
+            tmpObj = TaskpaneIntegration.mSolidWorksApplication.OpenDoc6(sldprtPath,
                 1,
                 32,
-                 "1000", //параметр Configuration открывает модель именно в той конфигурации, в какой мы задумали 
+                 "10000", //параметр Configuration открывает модель именно в той конфигурации, в какой мы задумали 
                 ref longstatus,
                 ref longwarnings);
             
-            swInsertedComponent = Part.AddComponent5(@"D:\VKR\Addin\ClutchLibrary\Upd\Муфта зубчатая.SLDPRT",
+            swInsertedComponent = Part.AddComponent5(sldprtPath,
                 0,
                 "Default",
                 true,
-                "1000", //параметр Configuration открывает модель именно в той конфигурации, в какой мы задумали
+                "4000", //параметр Configuration открывает модель именно в той конфигурации, в какой мы задумали
                 4.04840074935108E-02, 2.44451029699681E-02, 0.025849580254035);
-            TaskpaneIntegration.mSolidWorksApplication.CloseDoc(@"D:\VKR\Addin\ClutchLibrary\Upd\Муфта зубчатая.SLDPRT");
-            boolstatus = Part.AddComponent(@"D:\VKR\Addin\ClutchLibrary\Upd\Муфта зубчатая.SLDPRT", 
+            TaskpaneIntegration.mSolidWorksApplication.CloseDoc(sldprtPath);
+            boolstatus = Part.AddComponent(sldprtPath, 
                 -8.58845433685929E-03, 2.28718737489544E-02, 4.45478721521795E-02);
-            boolstatus = Part.AddComponent(@"D:\VKR\Addin\ClutchLibrary\Upd\Муфта зубчатая.SLDPRT",
+            boolstatus = Part.AddComponent(sldprtPath,
                 1.73858007183298E-02, 1.46586254122667E-02, 4.27317911526188E-02);
 
 

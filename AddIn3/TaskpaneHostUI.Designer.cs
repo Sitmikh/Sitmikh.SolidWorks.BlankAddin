@@ -68,7 +68,6 @@ namespace Sitmikh.SolidWorks.BlankAddin
             this.button9 = new System.Windows.Forms.Button();
             this.button11 = new System.Windows.Forms.Button();
             this.openFileDialog1 = new System.Windows.Forms.OpenFileDialog();
-            this.button10 = new System.Windows.Forms.Button();
             this.button12 = new System.Windows.Forms.Button();
             this.label8 = new System.Windows.Forms.Label();
             this.button13 = new System.Windows.Forms.Button();
@@ -474,15 +473,6 @@ namespace Sitmikh.SolidWorks.BlankAddin
             // 
             this.openFileDialog1.FileName = "openFileDialog1";
             // 
-            // button10
-            // 
-            this.button10.Location = new System.Drawing.Point(406, 681);
-            this.button10.Name = "button10";
-            this.button10.Size = new System.Drawing.Size(169, 35);
-            this.button10.TabIndex = 34;
-            this.button10.Text = "Добавление картинок";
-            this.button10.UseVisualStyleBackColor = true;
-            // 
             // button12
             // 
             this.button12.Location = new System.Drawing.Point(406, 392);
@@ -518,7 +508,7 @@ namespace Sitmikh.SolidWorks.BlankAddin
             this.button14.Name = "button14";
             this.button14.Size = new System.Drawing.Size(169, 35);
             this.button14.TabIndex = 39;
-            this.button14.Text = "Бесшумное добавление4\r\n";
+            this.button14.Text = "Отслеживание указателя мыши";
             this.button14.UseVisualStyleBackColor = true;
             this.button14.Click += new System.EventHandler(this.button14_Click);
             // 
@@ -531,7 +521,6 @@ namespace Sitmikh.SolidWorks.BlankAddin
             this.Controls.Add(this.label8);
             this.Controls.Add(this.button12);
             this.Controls.Add(this.button11);
-            this.Controls.Add(this.button10);
             this.Controls.Add(this.button9);
             this.Controls.Add(this.tabControl1);
             this.Controls.Add(this.groupBox4);
@@ -611,7 +600,6 @@ namespace Sitmikh.SolidWorks.BlankAddin
         private System.Windows.Forms.Button button9;
         private System.Windows.Forms.Button button11;
         private System.Windows.Forms.OpenFileDialog openFileDialog1;
-        private System.Windows.Forms.Button button10;
         private System.Windows.Forms.Button button12;
         private System.Windows.Forms.Label label8;
         private System.Windows.Forms.Button button13;
