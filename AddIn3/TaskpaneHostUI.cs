@@ -22,6 +22,7 @@ namespace Sitmikh.SolidWorks.BlankAddin
 
         //для выбора муфты
 
+        private string _selectedName;
         string image3DPath;
         string image2DPath;
         string excelTablePath;
@@ -674,7 +675,20 @@ namespace Sitmikh.SolidWorks.BlankAddin
 
         #endregion
 
-       
+
+        private void dataGridView1_CellClick(object sender, DataGridViewCellEventArgs e)
+        {
+            var dataGridView = sender as DataGridView;
+            if (dataGridView == null)
+            {
+                return;
+            }
+
+            if (dataGridView.CurrentRow.Selected)
+            {
+                _selectedName = dataGridView.CurrentRow.Cells[0].Value.ToString();
+            }
+        }
     }
 }
 

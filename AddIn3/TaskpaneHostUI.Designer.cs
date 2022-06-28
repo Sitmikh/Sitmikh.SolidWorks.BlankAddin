@@ -23,9 +23,9 @@ namespace Sitmikh.SolidWorks.BlankAddin
 
         #region Код, автоматически созданный конструктором компонентов
 
-        /// <summary> 
-        /// Требуемый метод для поддержки конструктора — не изменяйте 
-        /// содержимое этого метода с помощью редактора кода.
+        /// <summary>
+        /// Required method for Designer support - do not modify
+        /// the contents of this method with the code editor.
         /// </summary>
         private void InitializeComponent()
         {
@@ -161,24 +161,10 @@ namespace Sitmikh.SolidWorks.BlankAddin
             // 
             // comboBox1
             // 
-            this.comboBox1.AutoCompleteCustomSource.AddRange(new string[] {
-            "Зубчатая муфта",
-            "МУВП",
-            "Фланцевая муфта",
-            "Звездочка"});
+            this.comboBox1.AutoCompleteCustomSource.AddRange(new string[] { "Зубчатая муфта", "МУВП", "Фланцевая муфта", "Звездочка" });
             this.comboBox1.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
             this.comboBox1.FormattingEnabled = true;
-            this.comboBox1.Items.AddRange(new object[] {
-            "Муфта зубчатая",
-            "Муфта упругая втулочно-пальцевая",
-            "Муфта фланцевая",
-            "Муфта упругая со звездочкой\\",
-            "Муфта торообразная",
-            "Муфта фрикционная",
-            "Муфта свободного хода",
-            "Муфта центробежная",
-            "Муфта предохранительная",
-            "(Муфта продольно-свертная)"});
+            this.comboBox1.Items.AddRange(new object[] { "Муфта зубчатая", "Муфта упругая втулочно-пальцевая", "Муфта фланцевая", "Муфта упругая со звездочкой\\", "Муфта торообразная", "Муфта фрикционная", "Муфта свободного хода", "Муфта центробежная", "Муфта предохранительная", "(Муфта продольно-свертная)" });
             this.comboBox1.Location = new System.Drawing.Point(6, 36);
             this.comboBox1.MaxDropDownItems = 10;
             this.comboBox1.Name = "comboBox1";
@@ -329,6 +315,7 @@ namespace Sitmikh.SolidWorks.BlankAddin
             this.dataGridView1.RowHeadersVisible = false;
             this.dataGridView1.Size = new System.Drawing.Size(298, 232);
             this.dataGridView1.TabIndex = 24;
+            this.dataGridView1.CellClick += new System.Windows.Forms.DataGridViewCellEventHandler(this.dataGridView1_CellClick);
             this.dataGridView1.SelectionChanged += new System.EventHandler(this.dataGridView1_SelectionChanged);
             // 
             // button6
@@ -556,7 +543,6 @@ namespace Sitmikh.SolidWorks.BlankAddin
             ((System.ComponentModel.ISupportInitialize)(this.pictureBox2)).EndInit();
             this.ResumeLayout(false);
             this.PerformLayout();
-
         }
 
         #endregion
