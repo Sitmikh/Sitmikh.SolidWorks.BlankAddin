@@ -531,7 +531,7 @@ namespace Sitmikh.SolidWorks.BlankAddin
             tmpObj = TaskpaneIntegration.mSolidWorksApplication.OpenDoc6(sldprtPath,
                 1,
                 32,
-                 "", //параметр Configuration открывает модель именно в той конфигурации, в какой мы задумали 
+                 _selectedName, //параметр Configuration открывает модель именно в той конфигурации, в какой мы задумали 
                 ref longstatus,
                 ref longwarnings);
             
@@ -539,7 +539,7 @@ namespace Sitmikh.SolidWorks.BlankAddin
                 0,
                 "Default",
                 false,
-                "", //параметр Configuration открывает модель именно в той конфигурации, в какой мы задумали
+               _selectedName, //параметр Configuration открывает модель именно в той конфигурации, в какой мы задумали
                 0.0, 0.0, 0.0);
             TaskpaneIntegration.mSolidWorksApplication.CloseDoc(sldprtPath);
             //boolstatus = Part.AddComponent(sldprtPath, 
