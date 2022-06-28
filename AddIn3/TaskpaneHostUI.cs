@@ -266,13 +266,13 @@ namespace Sitmikh.SolidWorks.BlankAddin
             listBox1.Items.Clear();
             sldFile = @"D:\VKR\Addin\ClutchLibrary\";
 
-            if (checkBox1.Checked == true)
+            if (checkBox1.Checked)
                 sldFile += checkBox1.Text + @"\Зубчатая муфта.sldprt";
-            if (checkBox2.Checked == true)
+            if (checkBox2.Checked)
                 sldFile += checkBox2.Text + @"\Сборка МУВП 3 пальца.SLDASM";
-            if (checkBox3.Checked == true)
+            if (checkBox3.Checked)
                 sldFile += checkBox3.Text + @"\Фланцевая муфта.SLDASM";
-            if (checkBox4.Checked == true)
+            if (checkBox4.Checked)
                 sldFile += checkBox4.Text + @"\Муфта со звездочкой 4.SLDASM";
             #region
             int clutchIndex = comboBox1.SelectedIndex;
@@ -280,22 +280,22 @@ namespace Sitmikh.SolidWorks.BlankAddin
             {
                 case 0:
 
-                    sldFile += comboBox1.SelectedValue.ToString() + @"\Зубчатая муфта.sldprt";
+                    sldFile += comboBox1.SelectedValue + @"\Зубчатая муфта.sldprt";
                     //MessageBox.Show("0");
                     break;
                 case 1:
                     //MessageBox.Show(Convert.ToString(1));
-                    sldFile += comboBox1.SelectedValue.ToString() + @"\Сборка МУВП 3 пальца.SLDASM";
+                    sldFile += comboBox1.SelectedValue + @"\Сборка МУВП 3 пальца.SLDASM";
                     // MessageBox.Show(libraryPath);
                     break;
                 case 2:
                     //MessageBox.Show(Convert.ToString(2));
-                    sldFile += comboBox1.SelectedValue.ToString() + @"\Фланцевая муфта.SLDASM";
+                    sldFile += comboBox1.SelectedValue + @"\Фланцевая муфта.SLDASM";
                     // MessageBox.Show(libraryPath);
                     break;
                 case 3:
                     //MessageBox.Show(Convert.ToString(3));
-                    sldFile += comboBox1.SelectedValue.ToString() + @"\Муфта со звездочкой 4.SLDASM";
+                    sldFile += comboBox1.SelectedValue + @"\Муфта со звездочкой 4.SLDASM";
                     //MessageBox.Show(libraryPath);
                     break;
                 default:
@@ -335,8 +335,8 @@ namespace Sitmikh.SolidWorks.BlankAddin
             listBox1.Items.Clear();
 
             swAssembly = (AssemblyDoc)swModel;
-            swConfigurationMgr = (ConfigurationManager)swModel.ConfigurationManager; //служит для создания, выбора и просмотра многочисленных конфигураций деталей и сборок в документе
-            swConfiguration = (Configuration)swConfigurationMgr.ActiveConfiguration; //управление состояниями сборки или детали
+            swConfigurationMgr = swModel.ConfigurationManager; //служит для создания, выбора и просмотра многочисленных конфигураций деталей и сборок в документе
+            swConfiguration = swConfigurationMgr.ActiveConfiguration; //управление состояниями сборки или детали
             Components = swAssembly.GetComponents(true);
 
             for (int i = 0; i < Components.Length; i++)
