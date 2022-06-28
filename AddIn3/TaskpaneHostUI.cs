@@ -680,11 +680,9 @@ namespace Sitmikh.SolidWorks.BlankAddin
             {
                 return;
             }
-
-            if (dataGridView.CurrentRow.Selected)
-            {
-                _selectedName = dataGridView.CurrentRow.Cells[0].Value.ToString();
-            }
+            _selectedName = dataGridView.CurrentRow.Cells[0].Value.ToString();
+            dataGridView.CurrentRow.Selected = true;
+            
         }
     }
 }
