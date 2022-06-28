@@ -8,7 +8,6 @@ using System.Runtime.InteropServices;
 using System.Windows.Forms;
 using System.Diagnostics;
 using System.IO;
-using System.Linq;
 using ExcelDataReader;
 
 namespace Sitmikh.SolidWorks.BlankAddin
@@ -405,7 +404,6 @@ namespace Sitmikh.SolidWorks.BlankAddin
             dataGridView1.Rows.RemoveAt(0);
             dataGridView1.Rows.RemoveAt(0);
             dataGridView1.Columns.RemoveAt(0);
-            dataGridView1.Columns[1].HeaderText = "Fuck";
 
             pictureBox1.Image = Image.FromFile(@"D:\VKR\Addin\ClutchLibrary\Upd\Муфта зубчатая_3D.PNG");
             pictureBox2.Image = Image.FromFile(@"D:\VKR\Addin\ClutchLibrary\Upd\Муфта_зубчатая_Чертеж.PNG");
