@@ -223,12 +223,9 @@ namespace Sitmikh.SolidWorks.BlankAddin
             table = tableCollection[0]; //принимаем таблицу из Excel (ЭТА ЧАСТЬ ДО КОНЦА БЫЛА НИЖЕ LOAD TABLE в SELECTEDINDEXCHANGED)
             dataGridView1.DataSource = table;
 
-
             dataGridView1.Rows.RemoveAt(0);
             dataGridView1.Rows.RemoveAt(0);
             dataGridView1.Columns.RemoveAt(0);
-
-
 
             dataGridView1.Columns[0].HeaderText = "d"; //оформляем столбцы
             dataGridView1.Columns[0].Width = 50;
