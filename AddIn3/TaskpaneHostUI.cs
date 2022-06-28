@@ -227,7 +227,8 @@ namespace Sitmikh.SolidWorks.BlankAddin
             dataGridView1.Rows.RemoveAt(0);
             dataGridView1.Columns[0].HeaderText = "Наименование"; //оформляем столбцы
             dataGridView1.Columns[0].Width = 50;
-            dataGridView1.Columns[1].HeaderText = "";
+            dataGridView1.Columns[0].Visible = false;
+            dataGridView1.Columns[1].HeaderText = "d";
             dataGridView1.Columns[1].Width = 50;
             dataGridView1.Columns[2].HeaderText = "D";
             dataGridView1.Columns[2].Width = 50;
@@ -245,7 +246,7 @@ namespace Sitmikh.SolidWorks.BlankAddin
         private void textBox1_TextChanged(object sender, EventArgs e)
         {
             //table.DefaultView.RowFilter = string.Format("[{0}] LIKE '%{1}%'", "d", textBox1.Text);
-            //table.DefaultView.RowFilter = string.Format("Convert([{0}], 'System.String') LIKE '%{1}%'", "d", textBox1.Text);
+            table.DefaultView.RowFilter = string.Format("Convert([{0}], 'System.String') LIKE '%{1}%'", "d", textBox1.Text);
         }
 
         private void dataGridView1_SelectionChanged(object sender, EventArgs e)
@@ -538,7 +539,7 @@ namespace Sitmikh.SolidWorks.BlankAddin
             swInsertedComponent = Part.AddComponent5(sldprtPath,
                 0,
                 "Default",
-                false,
+                true,
                _selectedName, //параметр Configuration открывает модель именно в той конфигурации, в какой мы задумали
                 0.0, 0.0, 0.0);
             TaskpaneIntegration.mSolidWorksApplication.CloseDoc(sldprtPath);
