@@ -21,7 +21,7 @@ namespace Sitmikh.SolidWorks.BlankAddin
         //private ModelDoc2 tmpObj; //не используемый объект
 
         //для выбора муфты
-
+        
         string image3DPath;
         string image2DPath;
         string excelTablePath;
@@ -224,8 +224,6 @@ namespace Sitmikh.SolidWorks.BlankAddin
 
             dataGridView1.Rows.RemoveAt(0);
             dataGridView1.Rows.RemoveAt(0);
-            dataGridView1.Columns.RemoveAt(0);
-
             dataGridView1.Columns[0].HeaderText = "d"; //оформляем столбцы
             dataGridView1.Columns[0].Width = 50;
             dataGridView1.Columns[1].HeaderText = "D";
@@ -530,21 +528,21 @@ namespace Sitmikh.SolidWorks.BlankAddin
             tmpObj = TaskpaneIntegration.mSolidWorksApplication.OpenDoc6(sldprtPath,
                 1,
                 32,
-                 "10000", //параметр Configuration открывает модель именно в той конфигурации, в какой мы задумали 
+                 "", //параметр Configuration открывает модель именно в той конфигурации, в какой мы задумали 
                 ref longstatus,
                 ref longwarnings);
             
             swInsertedComponent = Part.AddComponent5(sldprtPath,
                 0,
                 "Default",
-                true,
-                "4000", //параметр Configuration открывает модель именно в той конфигурации, в какой мы задумали
-                4.04840074935108E-02, 2.44451029699681E-02, 0.025849580254035);
+                false,
+                "", //параметр Configuration открывает модель именно в той конфигурации, в какой мы задумали
+                0.0, 0.0, 0.0);
             TaskpaneIntegration.mSolidWorksApplication.CloseDoc(sldprtPath);
-            boolstatus = Part.AddComponent(sldprtPath, 
-                -8.58845433685929E-03, 2.28718737489544E-02, 4.45478721521795E-02);
-            boolstatus = Part.AddComponent(sldprtPath,
-                1.73858007183298E-02, 1.46586254122667E-02, 4.27317911526188E-02);
+            //boolstatus = Part.AddComponent(sldprtPath, 
+            //    -8.58845433685929E-03, 2.28718737489544E-02, 4.45478721521795E-02);
+            //boolstatus = Part.AddComponent(sldprtPath,
+            //    1.73858007183298E-02, 1.46586254122667E-02, 4.27317911526188E-02);
 
 
         }
