@@ -364,9 +364,9 @@ namespace Sitmikh.SolidWorks.BlankAddin
             this.groupBox1.Controls.Add(this.label2);
             this.groupBox1.Controls.Add(this.label3);
             this.groupBox1.Controls.Add(this.textBox1);
-            this.groupBox1.Location = new System.Drawing.Point(6, 3);
+            this.groupBox1.Location = new System.Drawing.Point(2, 3);
             this.groupBox1.Name = "groupBox1";
-            this.groupBox1.Size = new System.Drawing.Size(308, 75);
+            this.groupBox1.Size = new System.Drawing.Size(308, 57);
             this.groupBox1.TabIndex = 28;
             this.groupBox1.TabStop = false;
             this.groupBox1.Text = "Поиск";
@@ -486,7 +486,7 @@ namespace Sitmikh.SolidWorks.BlankAddin
             // label8
             // 
             this.label8.AutoSize = true;
-            this.label8.Location = new System.Drawing.Point(421, 335);
+            this.label8.Location = new System.Drawing.Point(320, 174);
             this.label8.Name = "label8";
             this.label8.Size = new System.Drawing.Size(31, 13);
             this.label8.TabIndex = 37;

@@ -90,10 +90,10 @@ namespace Sitmikh.SolidWorks.BlankAddin
             {
                 switch (comboBox1.SelectedIndex)
                 {
-                    case 0:
+                    case 0: // Зубчатая муфта !!
                         excelTablePath = Path.Combine(Path.GetDirectoryName(typeof(TaskpaneIntegration).Assembly.CodeBase).
                     Replace(@"file:\", string.Empty), "ClutchLibrary", "Муфта зубчатая", "Муфта_зубчатая.xlsx");
-                        //sldFile = @"D:\VKR\Addin\ClutchLibrary\Upd\Муфта зубчатая.xlsx";
+                        
                         image3DPath = Path.Combine(Path.GetDirectoryName(typeof(TaskpaneIntegration).Assembly.CodeBase).
                     Replace(@"file:\", string.Empty), "ClutchLibrary", "Муфта зубчатая", "Муфта_зубчатая_3D.PNG");
 
@@ -102,11 +102,15 @@ namespace Sitmikh.SolidWorks.BlankAddin
 
                         sldprtPath = Path.Combine(Path.GetDirectoryName(typeof(TaskpaneIntegration).Assembly.CodeBase).
                     Replace(@"file:\", string.Empty), "ClutchLibrary", "Муфта зубчатая", "Муфта_зубчатая.SLDPRT");
+
+                        label8.Text = "Примечание:";
                         break;
-                    case 1:
+
+
+                    case 1: // МУВП !!
                         excelTablePath = Path.Combine(Path.GetDirectoryName(typeof(TaskpaneIntegration).Assembly.CodeBase).
                     Replace(@"file:\", string.Empty), "ClutchLibrary", "Муфта упругая втулочно-пальецвая", "Муфта_упругая_втулочно-пальцевая.xlsx");
-                        //sldFile = @"D:\VKR\Addin\ClutchLibrary\Upd\Муфта зубчатая.xlsx";
+                        
                         image3DPath = Path.Combine(Path.GetDirectoryName(typeof(TaskpaneIntegration).Assembly.CodeBase).
                     Replace(@"file:\", string.Empty), "ClutchLibrary", "Муфта упругая втулочно-пальецвая", "Муфта упругая втулочно-пальецвая_3D.PNG");
 
@@ -115,62 +119,79 @@ namespace Sitmikh.SolidWorks.BlankAddin
 
                         sldprtPath = Path.Combine(Path.GetDirectoryName(typeof(TaskpaneIntegration).Assembly.CodeBase).
                     Replace(@"file:\", string.Empty), "ClutchLibrary", "Муфта упругая втулочно-пальецвая", "Муфта_упругая_втулочно-пальцевая.SLDPRT");
+
+                        label8.Text = "Примечание:";
                         break;
-                    case 2:
-                        label1.Text = "Эта муфта доступна в платной версии программы";
+
+
+                    case 2: // Фланцевая муфта !!
+                        excelTablePath = Path.Combine(Path.GetDirectoryName(typeof(TaskpaneIntegration).Assembly.CodeBase).
+                    Replace(@"file:\", string.Empty), "ClutchLibrary", "Муфта фланцевая", "Муфта_фланцевая.xlsx");
+                        
+                        image3DPath = Path.Combine(Path.GetDirectoryName(typeof(TaskpaneIntegration).Assembly.CodeBase).
+                    Replace(@"file:\", string.Empty), "ClutchLibrary", "Муфта фланцевая", "Муфта_фланцевая_3D.PNG");
+
+                        image2DPath = Path.Combine(Path.GetDirectoryName(typeof(TaskpaneIntegration).Assembly.CodeBase).
+                    Replace(@"file:\", string.Empty), "ClutchLibrary", "Муфта фланцевая", "Муфта_фланцевая_2D.PNG");
+
+                        sldprtPath = Path.Combine(Path.GetDirectoryName(typeof(TaskpaneIntegration).Assembly.CodeBase).
+                    Replace(@"file:\", string.Empty), "ClutchLibrary", "Муфта фланцевая", "Муфта_фланцевая.SLDPRT");
+                        
+                        label8.Text = "Примечание: Номинальный крутящий момент указан для полумуфт из стали. Для полумуфт из чугуна крутящий момент необходимо уменьшить вдвое";
                         break;
-                    case 3:
-                        label1.Text = "Эта муфта доступна в платной версии программы";
+
+
+                    case 3: // Муфта упругая со звездочкой
+                        
+                        label8.Text = "Примечание:Эта муфта доступна в платной версии программы";
                         break;
-                    case 4:
-                        label1.Text = "Эта муфта доступна в платной версии программы";
+                    
+                    
+                    case 4: // Муфта торообразная !
+
+                        label8.Text = "Примечание:Эта муфта доступна в платной версии программы";
                         break;
-                    case 5:
-                        label1.Text = "Эта муфта доступна в платной версии программы";
+                    
+                    
+                    case 5: // Муфта фрикционная
+
+                        label8.Text = "Примечание:Эта муфта доступна в платной версии программы";
                         break;
-                    case 6:
-                        label1.Text = "Эта муфта доступна в платной версии программы";
+                   
+                    
+                    case 6: // Муфта свободного хода
+
+                        label8.Text = "Примечание:Эта муфта доступна в платной версии программы";
                         break;
-                    case 7:
-                        label1.Text = "Эта муфта доступна в платной версии программы";
+                    
+                    
+                    case 7: // Муфта центробежная
+
+                        label8.Text = "Примечание:Эта муфта доступна в платной версии программы";
                         break;
-                    case 8:
-                        label1.Text = "Эта муфта доступна в платной версии программы";
+                    
+                    
+                    case 8: // Муфта предохронительная
+
+                        label1.Text = "Примечание:Эта муфта доступна в платной версии программы";
                         break;
-                    case 9:
-                        label1.Text = "Эта муфта доступна в платной версии программы";
+                   
+                    
+                    case 9: // Муфта продольно-свертная
+                       
+                        label8.Text = "Примечание:Эта муфта доступна в платной версии программы";
                         break;
                 }
                 try
                 {
                     LoadTable();
+                    
+
                 }
                 catch (Exception ex)
                 {
                     MessageBox.Show(ex.Message, "Ошибка! Не удалось найти указанную таблицу", MessageBoxButtons.OK, MessageBoxIcon.Error);
                 }
-
-                table = tableCollection[0]; //принимаем таблицу из Excel
-                dataGridView1.DataSource = table;
-
-                
-                dataGridView1.Rows.RemoveAt(0); 
-                dataGridView1.Rows.RemoveAt(0);
-                dataGridView1.Columns.RemoveAt(0);
-
-                
-
-                dataGridView1.Columns[0].HeaderText = "d"; //оформляем столбцы
-                dataGridView1.Columns[0].Width = 50;
-                dataGridView1.Columns[1].HeaderText = "D";
-                dataGridView1.Columns[1].Width = 50;
-                dataGridView1.Columns[2].HeaderText = "L";
-                dataGridView1.Columns[2].Width = 50;
-                dataGridView1.Columns[3].HeaderText = "Tкр";
-                dataGridView1.Columns[3].Width = 500;
-
-                pictureBox1.Image = Image.FromFile(image3DPath);
-                pictureBox2.Image = Image.FromFile(image2DPath);
             }
         }
         private void LoadTable()
@@ -198,6 +219,28 @@ namespace Sitmikh.SolidWorks.BlankAddin
             ds.Tables[0].AcceptChanges();
 
             tableCollection = ds.Tables;
+
+            table = tableCollection[0]; //принимаем таблицу из Excel (ЭТА ЧАСТЬ ДО КОНЦА БЫЛА НИЖЕ LOAD TABLE в SELECTEDINDEXCHANGED)
+            dataGridView1.DataSource = table;
+
+
+            dataGridView1.Rows.RemoveAt(0);
+            dataGridView1.Rows.RemoveAt(0);
+            dataGridView1.Columns.RemoveAt(0);
+
+
+
+            dataGridView1.Columns[0].HeaderText = "d"; //оформляем столбцы
+            dataGridView1.Columns[0].Width = 50;
+            dataGridView1.Columns[1].HeaderText = "D";
+            dataGridView1.Columns[1].Width = 50;
+            dataGridView1.Columns[2].HeaderText = "L";
+            dataGridView1.Columns[2].Width = 50;
+            dataGridView1.Columns[3].HeaderText = "Tкр";
+            dataGridView1.Columns[3].Width = 500;
+
+            pictureBox1.Image = Image.FromFile(image3DPath);
+            pictureBox2.Image = Image.FromFile(image2DPath);
         }
         #endregion
 
